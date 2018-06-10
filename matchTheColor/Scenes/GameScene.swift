@@ -35,7 +35,7 @@ class GameScene: SKScene {
     }
     
     func setupPhysics() {
-        physicsWorld.gravity = CGVector(dx: 0.0, dy: -1.0)
+        physicsWorld.gravity = CGVector(dx: 0.0, dy: -1.5)
         physicsWorld.contactDelegate = self
     }
     
@@ -91,7 +91,7 @@ class GameScene: SKScene {
     }
     
     func gameOver() {
-        UserDefaults.standard.set(score, forKey: "RecentScore")
+        UserDefaults.standard.set(score, forKey: "LastScore")
         if score > UserDefaults.standard.integer(forKey: "Highscore"){
             UserDefaults.standard.set(score, forKey: "Highscore")
         }
@@ -113,6 +113,10 @@ extension GameScene: SKPhysicsContactDelegate {
                 if currentColorIndex == switchState.rawValue {
                     run(SKAction.playSoundFileNamed("bling", waitForCompletion: false))
                     score += 1
+                    if (score % 10 == 0 && physicsWorld.gravity.dy >= -3.0){
+                        physicsWorld.gravity = CGVector(dx: 0.0, dy: physicsWorld.gravity.dy + (-0.1))
+                    }
+                    print(physicsWorld.gravity.dy)
                     updateScoreLabel()
                     ball.run(SKAction.fadeOut(withDuration: 0.25), completion: {
                         ball.removeFromParent()

@@ -38,12 +38,12 @@ class MenuScene: SKScene {
         highscoreLabel.position = CGPoint(x: frame.midX, y: frame.midY - highscoreLabel.frame.size.height*4)
         addChild(highscoreLabel)
         
-        let recentScoreLabel = SKLabelNode(text: "Recent Score: " + "\(UserDefaults.standard.integer(forKey: "RecentScore"))")
-        recentScoreLabel.fontName = "AvenirNext-Bold"
-        recentScoreLabel.fontSize = 40.0
-        recentScoreLabel.fontColor = UIColor.white
-        recentScoreLabel.position = CGPoint(x: frame.midX, y: highscoreLabel.position.y - recentScoreLabel.frame.size.height*2)
-        addChild(recentScoreLabel)
+        let lastScoreLabel = SKLabelNode(text: "Last Score: " + "\(UserDefaults.standard.integer(forKey: "LastScore"))")
+        lastScoreLabel.fontName = "AvenirNext-Bold"
+        lastScoreLabel.fontSize = 40.0
+        lastScoreLabel.fontColor = UIColor.white
+        lastScoreLabel.position = CGPoint(x: frame.midX, y: highscoreLabel.position.y - lastScoreLabel.frame.size.height*2)
+        addChild(lastScoreLabel)
     }
     
     func animate(label: SKLabelNode) {
